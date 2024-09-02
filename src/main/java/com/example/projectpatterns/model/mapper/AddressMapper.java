@@ -1,6 +1,7 @@
 package com.example.projectpatterns.model.mapper;
 
 import com.example.projectpatterns.model.Address;
+import com.example.projectpatterns.model.dto.AddressRequest;
 import com.example.projectpatterns.model.dto.AddressResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,7 +18,7 @@ public class AddressMapper {
         return modelMapper.map(address, AddressResponse.class);
     }
 
-    public Address toModel(AddressResponse addressResponse) {
+    public Address toModel(AddressRequest addressResponse) {
         return modelMapper.map(addressResponse, Address.class);
     }
 
