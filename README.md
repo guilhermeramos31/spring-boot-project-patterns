@@ -45,7 +45,7 @@ O projeto está organizado da seguinte forma:
 1. **Clone o Repositório:**
    ```bash
    git clone https://github.com/seu-usuario/seu-repositorio.git
-3. **Navegue até o Diretório do Projeto:
+3. **Navegue até o Diretório do Projeto:**
    ```bash
    cd seu-repositorio
 4. **Execute o Projeto.**
