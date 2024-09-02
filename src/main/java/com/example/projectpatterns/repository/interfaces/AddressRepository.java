@@ -10,5 +10,4 @@ public interface AddressRepository {
     List<Address> findAll();
     Address findById(UUID id);
     void save(Address address);
-    void update(Address address);
 }
