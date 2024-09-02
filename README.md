@@ -31,6 +31,8 @@ O projeto está organizado da seguinte forma:
   - `service`: Contém a lógica de negócios da aplicação.
     - `interfaces`: Contém as interfaces que definem contratos para os serviços.  
   - `model`: Contém as classes de modelo.
+    - `dto`: Contém os Data Transfer Objects utilizados para a troca de dados entre camadas.
+    - `mapper`: Contém classes responsáveis por mapear dados entre diferentes representações, como entidades e DTOs.
   - `repository`: Contém a interface para persistência de dados.
     - `interfaces`: Contém as interfaces que definem contratos para os repository.
 - `src/main/resources`: Contém arquivos de configuração e outros recursos.
