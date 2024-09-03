@@ -11,4 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ClientRequest {
     private String name;
+    private AddressRequest address;
 }
