@@ -31,7 +31,7 @@ public class AddressRepositoryImpl implements AddressRepository {
     }
 
     @Override
-    public void save(Address address) {
-        repository.save(address);
+    public Address save(Address address) {
+        return repository.save(address);
     }
 }

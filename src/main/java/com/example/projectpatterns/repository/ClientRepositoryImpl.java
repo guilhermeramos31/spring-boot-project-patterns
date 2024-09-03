@@ -1,5 +1,6 @@
 package com.example.projectpatterns.repository;
 
+import com.example.projectpatterns.model.Address;
 import com.example.projectpatterns.model.Client;
 import com.example.projectpatterns.repository.interfaces.ClientRepository;
 import com.example.projectpatterns.repository.interfaces.ClientRepositoryContext;
@@ -26,8 +27,8 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public void save(Client client) {
-        repository.save(client);
+    public Client save(Client client) {
+        return repository.save(client);
     }
 
     @Override

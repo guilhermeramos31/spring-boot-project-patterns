@@ -9,5 +9,5 @@ public interface AddressRepository {
     void delete(UUID id);
     List<Address> findAll();
     Address findById(UUID id);
-    void save(Address address);
+    Address save(Address address);
 }
