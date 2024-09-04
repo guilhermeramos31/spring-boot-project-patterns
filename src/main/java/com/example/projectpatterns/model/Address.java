@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -13,6 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Address {
     @Id
+    private UUID id;
+
     private String zipCode;
 
     private String street;
