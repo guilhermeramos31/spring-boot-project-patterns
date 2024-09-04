@@ -43,6 +43,8 @@ O projeto está organizado da seguinte forma:
 - Spring Boot
 - Spring Data JPA
 - H2 Database (ou outro banco de dados à sua escolha)
+- ModelMapper
+- FeignClient
 - Maven
 
 ## Como Executar o Projeto
