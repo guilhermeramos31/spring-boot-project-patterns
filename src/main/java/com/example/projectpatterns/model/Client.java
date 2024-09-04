@@ -21,6 +21,8 @@ public class Client {
 
     private String name;
 
+    private String email;
+
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Address address;
 }
