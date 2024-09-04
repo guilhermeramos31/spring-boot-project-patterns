@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -34,5 +35,10 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public Client findById(UUID id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
+    }
+
+    @Override
+    public Optional<Client> findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 }
