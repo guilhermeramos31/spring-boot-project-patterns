@@ -15,6 +15,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Address {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
     private String zipCode;

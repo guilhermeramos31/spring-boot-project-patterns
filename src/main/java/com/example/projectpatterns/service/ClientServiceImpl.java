@@ -32,9 +32,8 @@ public class ClientServiceImpl implements ClientService {
             throw new EntityExistsException("Client with this email already exists");
         }
 
-        addressService.save(client.getAddress());
-
         var clientModel = clientMapper.toModel(client);
+        clientModel.setAddress(addressService.save(client.getAddress()));
         return clientMapper.toDTO(clientRepository.save(clientModel));
     }
 }
