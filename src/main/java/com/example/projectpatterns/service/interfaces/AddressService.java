@@ -1,9 +1,8 @@
 package com.example.projectpatterns.service.interfaces;
 
+import com.example.projectpatterns.model.Address;
 import com.example.projectpatterns.model.dto.AddressRequest;
-import com.example.projectpatterns.model.dto.AddressResponse;
-import org.springframework.stereotype.Service;
 
 public interface AddressService {
-    AddressResponse save(AddressRequest address);
+    Address save(AddressRequest address);
 }

@@ -3,7 +3,9 @@ package com.example.projectpatterns.service;
 
 import com.example.projectpatterns.model.mapper.ClientMapper;
 import com.example.projectpatterns.repository.interfaces.ClientRepository;
+import com.example.projectpatterns.service.common.AddressCommon;
 import com.example.projectpatterns.service.common.ClientCommon;
+import com.example.projectpatterns.service.interfaces.AddressService;
 import jakarta.validation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClientServiceImplTest {
     @InjectMocks
     private ClientServiceImpl clientService;
+
+    @Mock
+    private AddressService addressService;
 
     @Mock
     private ClientRepository clientRepository;
@@ -40,6 +45,7 @@ class ClientServiceImplTest {
         Mockito.when(clientMapper.toModel(ClientCommon.CLIENT_REQUEST)).thenReturn(ClientCommon.CLIENT_VALID);
         Mockito.when(clientRepository.save(ClientCommon.CLIENT_VALID)).thenReturn(ClientCommon.CLIENT_VALID);
         Mockito.when(clientMapper.toDTO(ClientCommon.CLIENT_VALID)).thenReturn(ClientCommon.CLIENT_RESPONSE);
+        Mockito.when(addressService.save(AddressCommon.ADDRESS_REQUEST_VALID)).thenReturn(AddressCommon.ADDRESS_VALID);
 
         var clientSaved = clientService.save(ClientCommon.CLIENT_REQUEST);
 
