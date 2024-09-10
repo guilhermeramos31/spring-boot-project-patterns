@@ -2,6 +2,7 @@ package com.example.projectpatterns.model.mapper;
 
 import com.example.projectpatterns.model.Client;
 import com.example.projectpatterns.model.dto.ClientRequest;
+import com.example.projectpatterns.model.dto.ClientRequestUpdate;
 import com.example.projectpatterns.model.dto.ClientResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,6 +21,10 @@ public class ClientMapper {
 
     public Client toModel(ClientRequest clientResponse) {
         return modelMapper.map(clientResponse, Client.class);
+    }
+
+    public Client toModel(ClientRequestUpdate client) {
+        return  modelMapper.map(client, Client.class);
     }
 
     public List<ClientResponse> toDTO(List<Client> clients) {

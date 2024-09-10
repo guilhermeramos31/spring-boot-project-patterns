@@ -1,10 +1,7 @@
 package com.example.projectpatterns.service.common;
 
 import com.example.projectpatterns.model.Client;
-import com.example.projectpatterns.model.dto.AddressRequest;
-import com.example.projectpatterns.model.dto.AddressResponse;
-import com.example.projectpatterns.model.dto.ClientRequest;
-import com.example.projectpatterns.model.dto.ClientResponse;
+import com.example.projectpatterns.model.dto.*;
 
 import java.util.UUID;
 
@@ -36,9 +33,26 @@ public class ClientCommon {
     );
 
     public static ClientResponse CLIENT_RESPONSE = new ClientResponse(
+            clientId,
             CLIENT_VALID.getName(),
             CLIENT_VALID.getEmail(),
             new AddressResponse(
+                    AddressCommon.ADDRESS_VALID.getZipCode(),
+                    AddressCommon.ADDRESS_VALID.getStreet(),
+                    AddressCommon.ADDRESS_VALID.getAdditionalInfo(),
+                    AddressCommon.ADDRESS_VALID.getNeighborhood(),
+                    AddressCommon.ADDRESS_VALID.getCity(),
+                    AddressCommon.ADDRESS_VALID.getState(),
+                    AddressCommon.ADDRESS_VALID.getIbgeCode(),
+                    AddressCommon.ADDRESS_VALID.getGiaCode(),
+                    AddressCommon.ADDRESS_VALID.getAreaCode(),
+                    AddressCommon.ADDRESS_VALID.getSiafiCode()
+            )
+    );
+
+    public static ClientRequestUpdate CLIENT_REQUEST_UPDATE = new ClientRequestUpdate(
+            CLIENT_VALID.getName(),
+            new AddressRequest(
                     AddressCommon.ADDRESS_VALID.getZipCode(),
                     AddressCommon.ADDRESS_VALID.getStreet(),
                     AddressCommon.ADDRESS_VALID.getAdditionalInfo(),
@@ -62,5 +76,20 @@ public class ClientCommon {
             CLIENT_VALID.getName(),
             "",
             AddressCommon.ADDRESS_REQUEST_VALID
+    );
+    public static ClientRequest CLIENT_REQUEST_ADDRESS_INVALID = new ClientRequest(
+            CLIENT_VALID.getName(),
+            "",
+            AddressCommon.ADDRESS_REQUEST_INVALID
+    );
+
+    public static ClientRequestUpdate CLIENT_REQUEST_UPDATE_NAME_INVALID = new ClientRequestUpdate(
+            "",
+            AddressCommon.ADDRESS_REQUEST_VALID
+    );
+
+    public static ClientRequestUpdate CLIENT_REQUEST_UPDATE_ADDRESS_INVALID = new ClientRequestUpdate(
+            CLIENT_VALID.getName(),
+            AddressCommon.ADDRESS_REQUEST_INVALID
     );
 }

@@ -1,7 +1,9 @@
 package com.example.projectpatterns.service;
 
 import com.example.projectpatterns.model.dto.ClientRequest;
+import com.example.projectpatterns.model.dto.ClientRequestUpdate;
 import com.example.projectpatterns.model.dto.ClientResponse;
+import com.example.projectpatterns.model.mapper.AddressMapper;
 import com.example.projectpatterns.model.mapper.ClientMapper;
 import com.example.projectpatterns.repository.interfaces.ClientRepository;
 import com.example.projectpatterns.service.interfaces.AddressService;
@@ -11,12 +13,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
     private final AddressService addressService;
+    private final AddressMapper addressMapper;
 
     @Override
     public ClientResponse save(@Valid ClientRequest client) {
@@ -26,6 +31,9 @@ public class ClientServiceImpl implements ClientService {
         if (client.getEmail().isBlank()) {
             throw new IllegalArgumentException("Email cannot be blank");
         }
+        if (client.getAddress().getZipCode().isBlank()) {
+            throw new IllegalArgumentException("ZipCode cannot be blank");
+        }
 
         var clientFound = clientRepository.findByEmail(client.getEmail());
         if (clientFound.isPresent()) {
@@ -34,6 +42,24 @@ public class ClientServiceImpl implements ClientService {
 
         var clientModel = clientMapper.toModel(client);
         clientModel.setAddress(addressService.save(client.getAddress()));
+        return clientMapper.toDTO(clientRepository.save(clientModel));
+    }
+
+    @Override
+    public ClientResponse update(UUID id, ClientRequestUpdate client) {
+        var clientFound = clientRepository.findById(id);
+        if (client.getName().isBlank()) {
+            client.setName(clientFound.getName());
+        }
+        if (client.getAddress().getZipCode().isBlank()) {
+            client.getAddress().setZipCode(clientFound.getAddress().getZipCode());
+        }
+
+        var clientModel = clientMapper.toModel(client);
+        clientModel.setId(id);
+        clientModel.setName(client.getName());
+        clientModel.setAddress(addressService.save(client.getAddress()));
+
         return clientMapper.toDTO(clientRepository.save(clientModel));
     }
 }
