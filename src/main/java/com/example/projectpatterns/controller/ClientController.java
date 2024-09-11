@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -30,6 +31,11 @@ public class ClientController {
     @GetMapping("client/{id}")
     public ResponseEntity<ClientResponse> findById(@PathVariable("id") UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findById(id));
+    }
+
+    @GetMapping("clients")
+    public ResponseEntity<List<ClientResponse>> findAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(clientService.findAll());
     }
 
     @DeleteMapping("delete/client/{id}")
