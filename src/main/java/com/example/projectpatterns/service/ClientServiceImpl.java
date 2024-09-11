@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -79,5 +80,10 @@ public class ClientServiceImpl implements ClientService {
             message = "Client not deleted!";
         }
         return message;
+    }
+
+    @Override
+    public List<ClientResponse> findAll() {
+        return clientMapper.toDTO(clientRepository.findAll());
     }
 }

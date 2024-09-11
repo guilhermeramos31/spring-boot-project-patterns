@@ -165,4 +165,17 @@ class ClientServiceImplTest {
 
         Mockito.verify(clientRepository).findById(ClientCommon.CLIENT_VALID.getId());
     }
+
+    @Test
+    void GetAllClients() {
+        Mockito.when(clientRepository.findAll()).thenReturn(ClientCommon.CLIENTS);
+        Mockito.when(clientMapper.toDTO(ClientCommon.CLIENTS)).thenReturn(ClientCommon.CLIENTS_RESPONSE);
+
+        var clients = clientService.findAll();
+
+        assertNotNull(clients);
+        assertEquals(ClientCommon.CLIENTS_RESPONSE, clients);
+
+        Mockito.verify(clientRepository).findAll();
+    }
 }
