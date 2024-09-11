@@ -4,6 +4,7 @@ import com.example.projectpatterns.model.dto.ClientRequest;
 import com.example.projectpatterns.model.dto.ClientRequestUpdate;
 import com.example.projectpatterns.model.dto.ClientResponse;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface ClientService {
@@ -14,4 +15,6 @@ public interface ClientService {
     ClientResponse findById(UUID id);
 
     String delete(UUID id);
+
+    List<ClientResponse> findAll();
 }
