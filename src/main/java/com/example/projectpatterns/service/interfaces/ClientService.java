@@ -12,4 +12,6 @@ public interface ClientService {
     ClientResponse update(UUID id, ClientRequestUpdate clientRequest);
 
     ClientResponse findById(UUID id);
+
+    String delete(UUID id);
 }

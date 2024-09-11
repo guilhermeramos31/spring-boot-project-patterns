@@ -67,4 +67,17 @@ public class ClientServiceImpl implements ClientService {
         var clientFound = clientRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
         return clientMapper.toDTO(clientFound);
     }
+
+    @Override
+    public String delete(UUID id) {
+        var clientFound = clientRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
+        String message;
+        if (clientFound != null) {
+            clientRepository.delete(clientFound.getId());
+            message = "Client deleted successfully!";
+        } else {
+            message = "Client not deleted!";
+        }
+        return message;
+    }
 }
