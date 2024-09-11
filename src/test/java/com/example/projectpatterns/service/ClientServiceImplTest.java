@@ -144,4 +144,25 @@ class ClientServiceImplTest {
 
         Mockito.verify(clientRepository).findById(ClientCommon.CLIENT_VALID.getId());
     }
+
+    @Test
+    void DeleteClient(){
+        Mockito.when(clientRepository.findById(ClientCommon.CLIENT_VALID.getId())).thenReturn(Optional.of(ClientCommon.CLIENT_VALID));
+        Mockito.doNothing().when(clientRepository).delete(ClientCommon.CLIENT_VALID.getId());
+
+        var user = clientService.delete(ClientCommon.CLIENT_VALID.getId());
+
+        assertEquals("Client deleted successfully!", user);
+
+        Mockito.verify(clientRepository).delete(ClientCommon.CLIENT_VALID.getId());
+    }
+
+    @Test
+    void DeleteClient_NotFound() {
+        Mockito.when(clientRepository.findById(ClientCommon.CLIENT_VALID.getId())).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> clientService.delete(ClientCommon.CLIENT_VALID.getId()));
+
+        Mockito.verify(clientRepository).findById(ClientCommon.CLIENT_VALID.getId());
+    }
 }
