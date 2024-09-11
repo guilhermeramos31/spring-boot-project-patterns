@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface ClientRepository {
     void delete(UUID id);
     List<Client> findAll();
-    Client findById(UUID id);
+    Optional<Client> findById(UUID id);
     Client save(Client client);
     Optional<Client> findByEmail(String email);
 }

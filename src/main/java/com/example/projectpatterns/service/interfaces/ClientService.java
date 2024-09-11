@@ -10,4 +10,6 @@ public interface ClientService {
     ClientResponse save(ClientRequest client);
 
     ClientResponse update(UUID id, ClientRequestUpdate clientRequest);
+
+    ClientResponse findById(UUID id);
 }

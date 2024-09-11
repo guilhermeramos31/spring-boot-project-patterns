@@ -3,12 +3,12 @@ package com.example.projectpatterns.service;
 import com.example.projectpatterns.model.dto.ClientRequest;
 import com.example.projectpatterns.model.dto.ClientRequestUpdate;
 import com.example.projectpatterns.model.dto.ClientResponse;
-import com.example.projectpatterns.model.mapper.AddressMapper;
 import com.example.projectpatterns.model.mapper.ClientMapper;
 import com.example.projectpatterns.repository.interfaces.ClientRepository;
 import com.example.projectpatterns.service.interfaces.AddressService;
 import com.example.projectpatterns.service.interfaces.ClientService;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,6 @@ public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
     private final AddressService addressService;
-    private final AddressMapper addressMapper;
 
     @Override
     public ClientResponse save(@Valid ClientRequest client) {
@@ -47,7 +46,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientResponse update(UUID id, ClientRequestUpdate client) {
-        var clientFound = clientRepository.findById(id);
+        var clientFound = clientRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
         if (client.getName().isBlank()) {
             client.setName(clientFound.getName());
         }
@@ -61,5 +60,11 @@ public class ClientServiceImpl implements ClientService {
         clientModel.setAddress(addressService.save(client.getAddress()));
 
         return clientMapper.toDTO(clientRepository.save(clientModel));
+    }
+
+    @Override
+    public ClientResponse findById(UUID id) {
+        var clientFound = clientRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
+        return clientMapper.toDTO(clientFound);
     }
 }

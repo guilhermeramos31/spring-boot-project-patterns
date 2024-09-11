@@ -7,6 +7,7 @@ import com.example.projectpatterns.service.common.AddressCommon;
 import com.example.projectpatterns.service.common.ClientCommon;
 import com.example.projectpatterns.service.interfaces.AddressService;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -92,7 +93,7 @@ class ClientServiceImplTest {
 
     @Test
     void UpdateClient_Valid() {
-        Mockito.when(clientRepository.findById(ClientCommon.CLIENT_VALID.getId())).thenReturn(ClientCommon.CLIENT_VALID);
+        Mockito.when(clientRepository.findById(ClientCommon.CLIENT_VALID.getId())).thenReturn(Optional.of(ClientCommon.CLIENT_VALID));
         Mockito.when(clientMapper.toModel(ClientCommon.CLIENT_REQUEST_UPDATE)).thenReturn(ClientCommon.CLIENT_VALID);
         Mockito.when(clientRepository.save(ClientCommon.CLIENT_VALID)).thenReturn(ClientCommon.CLIENT_VALID);
         Mockito.when(clientMapper.toDTO(ClientCommon.CLIENT_VALID)).thenReturn(ClientCommon.CLIENT_RESPONSE);
@@ -108,7 +109,7 @@ class ClientServiceImplTest {
 
     @Test
     void UpdateClient_PartialUpdate_NameBlank() {
-        Mockito.when(clientRepository.findById(ClientCommon.CLIENT_VALID.getId())).thenReturn(ClientCommon.CLIENT_VALID);
+        Mockito.when(clientRepository.findById(ClientCommon.CLIENT_VALID.getId())).thenReturn(Optional.of(ClientCommon.CLIENT_VALID));
         Mockito.when(clientMapper.toModel(ClientCommon.CLIENT_REQUEST_UPDATE_NAME_INVALID)).thenReturn(ClientCommon.CLIENT_VALID);
         Mockito.when(addressService.save(ClientCommon.CLIENT_REQUEST_UPDATE.getAddress())).thenReturn(ClientCommon.CLIENT_VALID.getAddress());
         Mockito.when(clientRepository.save(ClientCommon.CLIENT_VALID)).thenReturn(ClientCommon.CLIENT_VALID);
@@ -120,5 +121,27 @@ class ClientServiceImplTest {
         assertEquals(ClientCommon.CLIENT_VALID.getName(), updatedClient.getName());
 
         Mockito.verify(clientRepository).save(ClientCommon.CLIENT_VALID);
+    }
+
+    @Test
+    void FindClient_Valid() {
+        Mockito.when(clientRepository.findById(ClientCommon.CLIENT_VALID.getId())).thenReturn(Optional.of(ClientCommon.CLIENT_VALID));
+        Mockito.when(clientMapper.toDTO(ClientCommon.CLIENT_VALID)).thenReturn(ClientCommon.CLIENT_RESPONSE);
+
+        var user = clientService.findById(ClientCommon.CLIENT_VALID.getId());
+
+        assertNotNull(user);
+        assertEquals(ClientCommon.CLIENT_RESPONSE, user);
+
+        Mockito.verify(clientRepository).findById(ClientCommon.CLIENT_VALID.getId());
+    }
+
+    @Test
+    void FindClient_NotFound() {
+        Mockito.when(clientRepository.findById(ClientCommon.CLIENT_VALID.getId())).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> clientService.findById(ClientCommon.CLIENT_VALID.getId()));
+
+        Mockito.verify(clientRepository).findById(ClientCommon.CLIENT_VALID.getId());
     }
 }

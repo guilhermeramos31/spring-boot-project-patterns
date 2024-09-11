@@ -33,8 +33,8 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public Client findById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
+    public Optional<Client>  findById(UUID id) {
+        return repository.findById(id);
     }
 
     @Override
