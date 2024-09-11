@@ -58,6 +58,7 @@ public class ClientServiceImpl implements ClientService {
         var clientModel = clientMapper.toModel(client);
         clientModel.setId(id);
         clientModel.setName(client.getName());
+        clientModel.setEmail(clientFound.getEmail());
         clientModel.setAddress(addressService.save(client.getAddress()));
 
         return clientMapper.toDTO(clientRepository.save(clientModel));
