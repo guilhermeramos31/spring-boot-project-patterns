@@ -1,5 +1,6 @@
 package com.example.projectpatterns.service.common;
 
+import com.example.projectpatterns.integration.model.AddressDTO;
 import com.example.projectpatterns.model.Address;
 import com.example.projectpatterns.model.dto.AddressRequest;
 import com.example.projectpatterns.model.dto.AddressResponse;
@@ -72,6 +73,22 @@ public class AddressCommon {
             "StateX",
             "123456",
             "654321",
+            "11",
+            "1234"
+    );
+
+    public static AddressDTO ADDRESS_DTO_VALID = new AddressDTO(
+            "60000000",
+            "Main Street",
+            "Apt 101",
+            "Central Park",
+            "New City",
+            "StateX",
+            "EstadoY",
+            "RegionZ",
+            "123456",
+            "654321",
+            "",
             "11",
             "1234"
     );
