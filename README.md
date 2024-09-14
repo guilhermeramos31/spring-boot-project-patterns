@@ -26,10 +26,15 @@ Nesta solução, foram implementados os seguintes padrões de projeto:
 O projeto está organizado da seguinte forma:
 
 - `src/main/java`: Código fonte da aplicação.
+  - `configuration`: Contém as classes de configuração da aplicação.
   - `controller`: Contém os controladores REST.
   - `service`: Contém a lógica de negócios da aplicação.
+    - `interfaces`: Contém as interfaces que definem contratos para os serviços.  
   - `model`: Contém as classes de modelo.
+    - `dto`: Contém os Data Transfer Objects utilizados para a troca de dados entre camadas.
+    - `mapper`: Contém classes responsáveis por mapear dados entre diferentes representações, como entidades e DTOs.
   - `repository`: Contém a interface para persistência de dados.
+    - `interfaces`: Contém as interfaces que definem contratos para os repository.
 - `src/main/resources`: Contém arquivos de configuração e outros recursos.
 
 ### Tecnologias Utilizadas
@@ -38,6 +43,8 @@ O projeto está organizado da seguinte forma:
 - Spring Boot
 - Spring Data JPA
 - H2 Database (ou outro banco de dados à sua escolha)
+- ModelMapper
+- FeignClient
 - Maven
 
 ## Como Executar o Projeto
